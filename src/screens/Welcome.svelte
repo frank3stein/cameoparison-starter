@@ -1,59 +1,40 @@
 <script>
-    import {createEventDispatcher} from 'svelte';
+  import { createEventDispatcher } from "svelte";
 
-    const dispatch = createEventDispatcher();
-    let selected = false;
-    const select = category => {
-        selected = true;
-        console.log('selected', category)
-        dispatch('select', {category})
-    }
+  const dispatch = createEventDispatcher();
+  let selected = false;
+  const select = (category) => {
+    selected = true;
+    console.log("selected", category);
+    dispatch("select", { category });
+  };
 
-    const categories= [
-    { slug: 'actors', label: 'Actors'},
-    { slug: 'athletes', label: 'Athletes'},
-    { slug: 'comedians', label: 'Comedians'},
-    { slug: 'creators', label: 'Creators'},
-    { slug: 'models', label: 'Models'},
-    { slug: 'musicians', label: 'Musicians'},
-    { slug: 'reality-tv', label: 'Reality TV'},
-    { slug: 'comedians', label: 'Comedians'},
-]
+  const categories = [
+    { slug: "actors", label: "Actors" },
+    { slug: "athletes", label: "Athletes" },
+    { slug: "comedians", label: "Comedians" },
+    { slug: "creators", label: "Creators" },
+    { slug: "models", label: "Models" },
+    { slug: "musicians", label: "Musicians" },
+    { slug: "reality-tv", label: "Reality TV" },
+    { slug: "comedians", label: "Comedians" },
+  ];
 </script>
 
-<header><h1 class="svelte-1fhxxll">
-    CameoP<span class="logo svelte-1fhxxll">a</span>rison
-</h1> 
-
-<p class="svelte-1fhxxll">
-    On <a href="https://cameo.com">cameo.com</a>, you can buy personalised video clips from everyone from Lindsay Lohan to Ice T.
-</p> 
-
-<p class="svelte-1fhxxll">But who commands the highest price?</p></header>
-
-<p>Pick a category to play a game:</p>
-
-<div class="categories">
-    {#each categories as category}
-        <button on:click={()=> select(category)} disabled={selected}>
-            {category.label}
-        </button>
-    {/each}
-</div>
 <style>
-h1 {
+  h1 {
     color: #ff3e00;
     text-transform: uppercase;
     font-size: min(12vw, 4em);
     font-weight: 100;
     margin: 0 0 0.5em 0;
-}
-p {
+  }
+  p {
     max-width: 24em;
     margin: 0 auto 1em auto;
-}
+  }
 
-.logo {
+  .logo {
     display: inline-block;
     background: url(/icons/compare.svg) 50% 50% no-repeat;
     background-size: 100% 100%;
@@ -62,27 +43,53 @@ p {
     transform: scale(1.4);
     left: 0.02em;
     text-indent: -9999px;
-}
+  }
 
-.categories {
+  .categories {
     width: 100%;
     max-width: 26em;
     margin: 0 auto;
-}
+  }
 
-button {
+  button {
     padding: 1em;
     display: block;
     margin: 0 0 0.2em 0;
     width: 100%;
-}
+  }
 
-@media (min-width: 640px) {
+  @media (min-width: 640px) {
     button {
-        display: inline;
-        margin: 0 0.2em 0.4em 0.2em;
-        width: auto;
+      display: inline;
+      margin: 0 0.2em 0.4em 0.2em;
+      width: auto;
     }
-}
-
+  }
 </style>
+
+<header>
+  <h1>
+    CameoP
+    <span class="logo svelte-1fhxxll">a</span>
+    rison
+  </h1>
+
+  <p>
+    On
+    <a href="https://cameo.com">cameo.com</a>
+    , you can buy personalised video clips from everyone from Lindsay Lohan to
+    Ice T.
+  </p>
+
+  <p>But who commands the highest price?</p>
+</header>
+
+<p>Pick a category to play a game:</p>
+
+<div class="categories">
+  {#each categories as category}
+    <button on:click={() => select(category)} disabled={selected}>
+      {category.label}
+    </button>
+  {/each}
+</div>
