@@ -1,12 +1,13 @@
 import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import replace from '@rollup/plugin-replace';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 
 const production = !process.env.ROLLUP_WATCH;
 
-export default {
+export default [{
 	input: 'src/main.js',
 	output: {
 		sourcemap: true,
@@ -51,7 +52,19 @@ export default {
 	watch: {
 		clearScreen: false
 	}
-};
+
+}, {
+	input: 'src/service-worker.js',
+	output: {
+		file: 'public/service-worker.js',
+		format: 'esm'
+	},
+	plugins: [
+		replace({
+			TIMESTAMP: Date.now()
+		})
+	]
+}];
 
 function serve() {
 	let started = false;
